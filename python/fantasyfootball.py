@@ -41,7 +41,7 @@ class FantasyFootball:
 
             print("End of gameweek!\n")
             self.league.new_gameweek()
-            # match.continue_key()
+            match.continue_key()
 
     def away_series(self):
         game_pairs_away = [
@@ -77,13 +77,13 @@ class FantasyFootball:
 
             print("End of gameweek!\n")
             self.league.new_gameweek()
-            # match.continue_key()
+            match.continue_key()
 
     def print_table(self):
         self.league_table = sorted(self.league.teams, key=lambda x: (-x.get_points(), -x.get_goal_difference(), -x.get_goals_for()), reverse=False)
-        max_team_name_length = max(len(team.get_name()) for team in self.league_table) + 2  # Add 2 for padding
-        column_widths = [5, max_team_name_length, 5, 5, 5, 5, 5, 5, 6, 6]  # Pos, Team, P, W, D, L, F, A, GD, Pts
-        total_width = sum(column_widths) + len(column_widths) + 1  # Add 1 for the vertical borders
+        max_team_name_length = max(len(team.get_name()) for team in self.league_table) + 2 
+        column_widths = [5, max_team_name_length, 5, 5, 5, 5, 5, 5, 6, 6] 
+        total_width = sum(column_widths) + len(column_widths) + 1 
 
         print("\nLEAGUE TABLE")
         print("╔" + "═" * (total_width - 2) + "╗")
@@ -92,7 +92,7 @@ class FantasyFootball:
         print("╠" + "═" * (total_width - 2) + "╣")
 
         for index, team in enumerate(self.league_table):
-            team_name = team.get_name()[:max_team_name_length - 2]  # Truncate team name to fit the column width
+            team_name = team.get_name()[:max_team_name_length - 2] 
             row = "║{:^5}║{:<" + str(max_team_name_length) + "}║{:^5}║{:^5}║{:^5}║{:^5}║{:^5}║{:^5}║{:^6}║{:^6}║"
             print(row.format(index + 1, team_name, team.get_played(), team.get_won(), team.get_drawn(), team.get_lost(), team.get_goals_for(), team.get_goals_against(), team.get_goal_difference(), team.get_points()))
 
@@ -104,19 +104,15 @@ class FantasyFootball:
         for team in self.league.teams:
             all_players.extend(team.players)
 
-        # Sort players by goals in descending order
         players_by_goals = sorted(all_players, key=lambda x: x.get_goals(), reverse=True)[:15]
 
-        # Sort players by assists in descending order
         players_by_assists = sorted(all_players, key=lambda x: x.get_assists(), reverse=True)[:15]
 
-        # Sort players by total goal contributions (goals + assists) in descending order
         players_by_contributions = sorted(all_players, key=lambda x: x.get_goals() + x.get_assists(), reverse=True)[:15]
 
-        max_name_length = max(len(player.get_name()) for player in all_players) + 2  # Add 2 for padding
-        column_widths = [5, max_name_length, 5]  # Pos, Player, Goals/Assists/Contributions
-        total_width = sum(column_widths) + len(column_widths) + 1  # Add 1 for the vertical borders
-
+        max_name_length = max(len(player.get_name()) for player in all_players) + 2  
+        column_widths = [5, max_name_length, 5]  
+        total_width = sum(column_widths) + len(column_widths) + 1  
         print("\nTOP 15 SCORERS")
         print("╔" + "═" * (total_width - 2) + "╗")
         header = "║{:^5}║{:^" + str(max_name_length) + "}║{:^5}║"
@@ -124,7 +120,7 @@ class FantasyFootball:
         print("╠" + "═" * (total_width - 2) + "╣")
 
         for index, player in enumerate(players_by_goals):
-            player_name = player.get_name()[:max_name_length - 2]  # Truncate player name to fit the column width
+            player_name = player.get_name()[:max_name_length - 2]  
             row = "║{:^5}║{:<" + str(max_name_length) + "}║{:^5}║"
             print(row.format(index + 1, player_name, player.get_goals()))
 
@@ -138,7 +134,7 @@ class FantasyFootball:
         print("╠" + "═" * (total_width) + "╣")
 
         for index, player in enumerate(players_by_assists):
-            player_name = player.get_name()[:max_name_length - 2]  # Truncate player name to fit the column width
+            player_name = player.get_name()[:max_name_length - 2]  
             row = "║{:^5}║{:<" + str(max_name_length) + "}║{:^7}║"
             print(row.format(index + 1, player_name, player.get_assists()))
 
@@ -152,7 +148,7 @@ class FantasyFootball:
         print("╠" + "═" * (total_width - 2) + "╣")
 
         for index, player in enumerate(players_by_contributions):
-            player_name = player.get_name()[:max_name_length - 2]  # Truncate player name to fit the column width
+            player_name = player.get_name()[:max_name_length - 2]  
             row = "║{:^5}║{:<" + str(max_name_length) + "}║{:^5}║"
             print(row.format(index + 1, player_name, player.get_goals() + player.get_assists()))
 

@@ -91,7 +91,7 @@ class Match:
                         print(f"Score: {self.home_team.get_name()} {self.home_team_goals} - {self.away_team_goals} {self.away_team.get_name()}")
 
 
-                        # self.change_tactic(user_team)
+                        self.change_tactic(user_team)
 
                     elif assigned_team == self.away_team:
                         goal_scorer = self.select_goal_scorer(assigned_team)
@@ -117,7 +117,7 @@ class Match:
                         print(f"Score: {self.home_team.get_name()} {self.home_team_goals} - {self.away_team_goals} {self.away_team.get_name()}")
 
 
-                        # self.change_tactic(user_team)
+                        self.change_tactic(user_team)
 
                 elif assigned_action != "No shot" and assigned_action != "Goal scored":
                     assigned_team = [self.home_team, self.away_team][random.randint(0, 1)]
@@ -125,7 +125,7 @@ class Match:
 
         self.print_final_score()
         self.update_stats()
-        # self.continue_key()
+        self.continue_key()
 
     def assign_action(self, attack_level):
 
